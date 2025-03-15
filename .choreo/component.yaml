@@ -3,7 +3,7 @@ endpoints:
   - name: choreo
     service:
       port: 8080
-      basePath: /
+      basePath: /employees
     type: REST
     displayName: Choreo
     networkVisibilities:

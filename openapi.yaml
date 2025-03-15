@@ -6,7 +6,7 @@ info:
   version: 1.0.0
 
 servers:
-  - url: "https://0525b1d5-bd98-406f-8f76-3e6a330f489c-dev.e1-eu-north-azure.choreoapis.dev/choreo-testing/choreo/v1.0"
+  - url: "https://choreo-wso2-employees.onrender.com/"
 
 paths:
   /users:
