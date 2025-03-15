@@ -1,11 +1,11 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: Employees Service API
   description: API for managing users and their todos.
   version: 1.0.0
 
 servers:
-  - url: "https://0525b1d5-bd98-406f-8f76-3e6a330f489c-dev.e1-eu-north-azure.choreoapis.dev/employees-service/employee-service/v1.0"
+  - url: "https://0525b1d5-bd98-406f-8f76-3e6a330f489c-dev.e1-eu-north-azure.choreoapis.dev/choreo-testing/choreo/v1.0"
 
 paths:
   /users:
