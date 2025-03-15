@@ -11,3 +11,11 @@ endpoints:
       - Organization
       - Public
     schemaFilePath: openapi.yaml
+
+dependencies:
+  connectionReferences:
+    - name: employees-backend
+      resourceRef: service:/ExternalRenderAPI
+  env:
+    - name: BACKEND_URL
+      value: "https://choreo-wso2-employees.onrender.com/employees"
