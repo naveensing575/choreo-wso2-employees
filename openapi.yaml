@@ -1,5 +1,5 @@
 openapi: 3.1.0
-swagger: 2.0.0
+swagger: "2.0"
 info:
   title: Employees Service API
   description: API for managing users and their todos.
