@@ -1,0 +1,13 @@
+schemaVersion: 1.1
+endpoints:
+  - name: choreo
+    service:
+      port: 8080
+      basePath: /
+    type: REST
+    displayName: Choreo
+    networkVisibilities:
+      - Project
+      - Organization
+      - Public
+    schemaFilePath: openapi.yaml
