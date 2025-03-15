@@ -1,12 +1,20 @@
-name: employees-service
-type: service
-implementation: container
-source:
-  type: git
-  repository: "https://github.com/naveensing575/choreo-wso2-employees"
-  branch: main
-build:
-  buildCommand: npm install
-  startCommand: node server.js
-port: 8080
-public: true
+schemaVersion: 1.1
+
+# Define the endpoints for the service
+endpoints:
+  - name: employees-service
+    displayName: Employees Service
+    service:
+      basePath: /employees
+      port: 8080
+    type: REST
+    networkVisibilities:
+      - Public
+      - Organization
+    schemaFilePath: openapi.yaml
+
+# Runtime configurations
+configurations:
+  env:
+    - name: PORT
+      value: "8080"

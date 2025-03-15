@@ -1,0 +1,107 @@
+openapi: 3.1.0
+info:
+  title: Employees Service API
+  description: API for managing users and their todos.
+  version: 1.0.0
+
+servers:
+  - url: "https://0525b1d5-bd98-406f-8f76-3e6a330f489c-dev.e1-eu-north-azure.choreoapis.dev/employees-service/employee-service/v1.0"
+
+paths:
+  /users:
+    get:
+      summary: Get all users
+      operationId: getUsers
+      responses:
+        "200":
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+
+  /todos:
+    get:
+      summary: Get all todos
+      operationId: getTodos
+      responses:
+        "200":
+          description: A list of todos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Todo"
+
+  /user-todos/{userId}:
+    get:
+      summary: Get user details with todos
+      operationId: getUserTodos
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID of the user
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User details with associated todos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserWithTodos"
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        address:
+          type: object
+          properties:
+            street:
+              type: string
+            city:
+              type: string
+            zipcode:
+              type: string
+
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        title:
+          type: string
+        completed:
+          type: boolean
+
+    UserWithTodos:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        todos:
+          type: array
+          items:
+            $ref: "#/components/schemas/Todo"
