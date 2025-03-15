@@ -9,28 +9,54 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
-// Fetch Users and Todos from JSONPlaceholder
-app.get("/employees", async (req, res) => {
+const BASE_URL = "https://jsonplaceholder.typicode.com";
+
+// 1️⃣ Get all users
+app.get("/employees/users", async (req, res) => {
   try {
-    const [usersResponse, todosResponse] = await Promise.all([
-      axios.get("https://jsonplaceholder.typicode.com/users"),
-      axios.get("https://jsonplaceholder.typicode.com/todos"),
+    const response = await axios.get(`${BASE_URL}/users`);
+    res.json(response.data);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error fetching users", error: error.message });
+  }
+});
+
+// 2️⃣ Get all todos
+app.get("/employees/todos", async (req, res) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/todos`);
+    res.json(response.data);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error fetching todos", error: error.message });
+  }
+});
+
+// 3️⃣ Get user details and todos by userId
+app.get("/employees/user-todos/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Fetch user and todos in parallel
+    const [userResponse, todosResponse] = await Promise.all([
+      axios.get(`${BASE_URL}/users/${userId}`),
+      axios.get(`${BASE_URL}/todos?userId=${userId}`),
     ]);
 
-    const users = usersResponse.data;
-    const todos = todosResponse.data;
-
-    // Merge users with their respective todos
-    const integratedData = users.map((user) => ({
-      ...user,
-      todos: todos.filter((todo) => todo.userId === user.id),
-    }));
+    // Merge user data with todos
+    const integratedData = {
+      ...userResponse.data,
+      todos: todosResponse.data,
+    };
 
     res.json(integratedData);
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error fetching data", error: error.message });
+      .json({ message: "Error fetching user todos", error: error.message });
   }
 });
 
