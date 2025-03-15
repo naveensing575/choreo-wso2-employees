@@ -1,7 +1,10 @@
-require("dotenv").config();
-const express = require("express");
-const axios = require("axios");
-const cors = require("cors");
+import dotenv from "dotenv";
+import express from "express";
+import axios from "axios";
+import cors from "cors";
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -11,7 +14,7 @@ app.use(express.json());
 
 const BASE_URL = "https://jsonplaceholder.typicode.com";
 
-// 1️⃣ Get all users
+// Get all users
 app.get("/employees/users", async (req, res) => {
   try {
     const response = await axios.get(`${BASE_URL}/users`);
@@ -23,7 +26,7 @@ app.get("/employees/users", async (req, res) => {
   }
 });
 
-// 2️⃣ Get all todos
+// Get all todos
 app.get("/employees/todos", async (req, res) => {
   try {
     const response = await axios.get(`${BASE_URL}/todos`);
@@ -35,7 +38,7 @@ app.get("/employees/todos", async (req, res) => {
   }
 });
 
-// 3️⃣ Get user details and todos by userId
+// Get user details and todos by userId
 app.get("/employees/user-todos/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
