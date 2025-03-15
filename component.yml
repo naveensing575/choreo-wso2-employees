@@ -1,0 +1,12 @@
+name: employees-service
+type: service
+implementation: container
+source:
+  type: git
+  repository: "https://github.com/naveensing575/choreo-wso2-employees"
+  branch: main
+build:
+  buildCommand: npm install
+  startCommand: node server.js
+port: 8080
+public: true
